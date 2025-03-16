@@ -1,5 +1,5 @@
 <script>
-  import SecondaryButton from "./buttons/SecondaryButton.svelte";
+  import SecondaryButton from "#shared-components/buttons/SecondaryButton.svelte";
   let {username, image_url, email} = $props();
   let onClick = () => {};
 </script>

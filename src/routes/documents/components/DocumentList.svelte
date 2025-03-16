@@ -2,8 +2,8 @@
   import CreateDocumentCard from './CreateDocumentCard.svelte';
   import DocumentCard from './DocumentCard.svelte';
   import DocumentRow from './DocumentRow.svelte';
-  import SecondaryButton from './buttons/SecondaryButton.svelte';
-  import Dropdown from './Dropdown.svelte';
+  import SecondaryButton from '#shared-components/buttons/SecondaryButton.svelte';
+  import Dropdown from '#shared-components/Dropdown.svelte';
   import Icon from '@iconify/svelte';
 
   let {documents, onCreateDocument = () => {}} = $props();
