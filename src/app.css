@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
+
 @theme {
+    --radius-global: var(--radius-md);
+
     --color-background: var(--color-zinc-100);
     --color-surface: var(--color-zinc-100);
     --color-text: var(--color-zinc-900);
@@ -8,6 +11,9 @@
     --color-separator: var(--color-zinc-600);
     --color-border: var(--color-zinc-600);
     --color-hover: var(--color-zinc-200);
+    --color-primary: var(--color-cyan-300);
+    --color-primary-variant-1: var(--color-cyan-200);
+    --color-on-primary: var(--color-cyan-900);
 
     --shadow-center: 0px 0px 12px -1px rgba(0, 0, 0, 0.1);
 }

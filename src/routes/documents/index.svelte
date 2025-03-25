@@ -8,6 +8,7 @@
   import Modal from '#shared-components/Modal.svelte';
   import ClosableModal from '#shared-components/ClosableModal.svelte';
   import SecondaryButton from '#shared-components/buttons/SecondaryButton.svelte';
+  import ScreenContainer from "#shared-components/ScreenContainer.svelte";
 
   import Icon from '@iconify/svelte';
 
@@ -29,7 +30,6 @@
 
   let showProfileModal = $state(false);
   let onProfileCardClicked = () => {showProfileModal = true;}
-  let onCloseProfileModal = () => {showProfileModal = false;}
 
   let showCreateDocumentModal = $state(false);
   let onCreateDocumentClicked = () => {showCreateDocumentModal = true;};
@@ -38,7 +38,7 @@
   let onThemeSwitchClicked = () => {isDark = !isDark;};
 </script>
 
-<div class="h-[100vh] bg-background overflow-auto {isDark ? 'dark' : ''}">
+<ScreenContainer {isDark}>
     <div class="max-w-[832px] mx-auto ps-5 pe-5">
         <div class="flex flex-row gap-1 justify-end items-center mt-[6px]">
             <SecondaryButton onclick={onThemeSwitchClicked}>
@@ -65,4 +65,4 @@
         <div class="mt-[20px] lg:mt-[60px]"></div>
         <DocumentList documents={documents} />
     </div>
-</div>
+</ScreenContainer>
