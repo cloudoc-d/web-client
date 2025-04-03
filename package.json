@@ -18,6 +18,7 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.8",
     "@roxi/routify": "^3.0.0-next.261",
     "@tailwindcss/vite": "^4.0.13"
   },

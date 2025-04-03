@@ -6,7 +6,7 @@
   import Dropdown from '#shared-components/Dropdown.svelte';
   import Icon from '@iconify/svelte';
 
-  let {documents, onCreateDocument = () => {}} = $props();
+  let {documents = [], onCreateDocument = () => {}} = $props();
 
   const SortOptions = {
     NAME: 'Name',
@@ -22,7 +22,7 @@
         if (currentSortOption === SortOptions.NAME)
           return a.name.localeCompare(b.name);
         else if (currentSortOption === SortOptions.LAST_VIEWED)
-          return a.date > b.date;
+          return a.edited_at > b.edited_at;
     }
   ))
 
@@ -63,7 +63,7 @@
     {:else}
         <div class="flex flex-col flex-nowrap gap-2">
             {#each documents_sorted as document}
-                <DocumentRow {...document}/>
+                <DocumentRow name={document.name} date={document.edited_at}/>
                 <hr class="text-separator">
             {/each}
         </div>

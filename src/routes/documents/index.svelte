@@ -1,9 +1,8 @@
 <script>
   import CreateDocumentCard from './components/CreateDocumentCard.svelte';
-  import ProfileCard from './components/ProfileCard.svelte';
-  import DocumentCard from './components/DocumentCard.svelte';
   import ProfileCardSmall from './components/ProfileCardSmall.svelte';
   import DocumentList from './components/DocumentList.svelte';
+  import DocumentCreationDialog from './components/DocumentCreationDialog.svelte';
 
   import Modal from '#shared-components/Modal.svelte';
   import ClosableModal from '#shared-components/ClosableModal.svelte';
@@ -11,6 +10,11 @@
   import ScreenContainer from "#shared-components/ScreenContainer.svelte";
 
   import Icon from '@iconify/svelte';
+  import { onMount } from 'svelte';
+
+  import {ApiError, CloudocClient} from "#api/api.js";
+
+  const client = new CloudocClient('asdfasdf');
 
   let user = {
     username: 'Zandari',
@@ -18,13 +22,8 @@
     email: 'nexsus.play@gmail.com',
   };
 
-  let documents = $state([
-    {name: 'Отчётик', date: '29.03.2025'},
-    {name: 'РПЗ по курсовой', date: '29.03.2025'},
-    {name: 'Расчётно-пояснительная записка', date: '29.03.2025'},
-    {name: 'Лаба 1', date: '19.03.2025'},
-    {name: 'asdfsadfasdf', date: '29.03.2025'},
-  ]);
+  let documents = $state();
+
 
   let isDark = $state(true);
 
@@ -36,6 +35,15 @@
   let onCloseCreateDocumentModal = () => {showCreateDocumentModal = false;};
 
   let onThemeSwitchClicked = () => {isDark = !isDark;};
+
+  onMount(() => {
+    documents = client.getDocumentsInfo()
+  });
+
+  let createDocument = (documentName) => {
+    client.createDocument(documentName)
+
+  };
 </script>
 
 <ScreenContainer {isDark}>
@@ -57,12 +65,15 @@
             </ClosableModal>
         {/if}
         {#if showCreateDocumentModal}
-            <Modal>
-                Hello world!
-            </Modal>
+            <ClosableModal onclose={onCloseCreateDocumentModal}>
+                <DocumentCreationDialog onCreate={createDocument}/>
+            </ClosableModal>
         {/if}
 
         <div class="mt-[20px] lg:mt-[60px]"></div>
-        <DocumentList documents={documents} />
+        <DocumentList
+            onCreateDocument={onCreateDocumentClicked}
+            documents={documents}
+        />
     </div>
 </ScreenContainer>
